@@ -38,6 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         RxJavaCreateOperator rxJavaCreateOperator = new RxJavaCreateOperator();
-        rxJavaCreateOperator.onCreate();
+        // rxJavaCreateOperator.onCreate();
+        // rxJavaCreateOperator.onJust();
+        // rxJavaCreateOperator.onFromArray();
+        // rxJavaCreateOperator.onFromCallable();
+        // rxJavaCreateOperator.onFromFuture();
+        // rxJavaCreateOperator.onFromIterable();
+        // rxJavaCreateOperator.onDefer();
+        // rxJavaCreateOperator.onTimer();
+        // rxJavaCreateOperator.onInterval();
+        // rxJavaCreateOperator.onIntervalRange();
+        // rxJavaCreateOperator.onRange();
+        // rxJavaCreateOperator.onRangeLong();
+        // rxJavaCreateOperator.onEmpty();
+        rxJavaCreateOperator.onNever();
+        rxJavaCreateOperator.onError();
     }
 }
