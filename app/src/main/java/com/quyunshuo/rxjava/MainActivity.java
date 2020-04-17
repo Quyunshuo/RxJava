@@ -51,7 +51,16 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaCreateOperator.onRange();
         // rxJavaCreateOperator.onRangeLong();
         // rxJavaCreateOperator.onEmpty();
-        rxJavaCreateOperator.onNever();
-        rxJavaCreateOperator.onError();
+        // rxJavaCreateOperator.onNever();
+        // rxJavaCreateOperator.onError();
+
+        RxJavaTransformOperator rxJavaTransformOperator = new RxJavaTransformOperator();
+        // rxJavaTransformOperator.onMap();
+        // rxJavaTransformOperator.onFlatMap();
+        // rxJavaTransformOperator.onConcatMap();
+        // rxJavaTransformOperator.onBuffer();
+        // rxJavaTransformOperator.onGroupBy();
+        // rxJavaTransformOperator.onScan();
+        rxJavaTransformOperator.onWindow();
     }
 }
