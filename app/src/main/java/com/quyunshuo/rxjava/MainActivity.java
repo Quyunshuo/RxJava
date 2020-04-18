@@ -77,5 +77,29 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaCombinationOperator.onCollect();
         // rxJavaCombinationOperator.onStartWithAndStartWithArray();
         // rxJavaCombinationOperator.onCount();
+
+        // 功能操作符
+        // RxJavaFunctionalOperator rxJavaFunctionalOperator = new RxJavaFunctionalOperator();
+        // rxJavaFunctionalOperator.onDelay();
+        // rxJavaFunctionalOperator.onDoOnEach();
+        // rxJavaFunctionalOperator.onDoOnNext();
+        // rxJavaFunctionalOperator.onDoAfterNext();
+        // rxJavaFunctionalOperator.onDoOnComplete();
+        // rxJavaFunctionalOperator.onDoOnError();
+        // rxJavaFunctionalOperator.onDoOnSubscribe();
+        // rxJavaFunctionalOperator.onDoOnDispose();
+        // rxJavaFunctionalOperator.onDoOnLifecycle();
+        // rxJavaFunctionalOperator.onDoOnTerminateAndDoAfterTerminate();
+        // rxJavaFunctionalOperator.onDoFinally();
+        // rxJavaFunctionalOperator.onOnErrorReturn();
+        // rxJavaFunctionalOperator.onOnErrorResumeNext();
+        // rxJavaFunctionalOperator.onOnExceptionResumeNext();
+        // rxJavaFunctionalOperator.onRetry();
+        // rxJavaFunctionalOperator.onRetryUntil();
+        // rxJavaFunctionalOperator.onRetryWhen();
+        // rxJavaFunctionalOperator.onRepeat();
+        // rxJavaFunctionalOperator.onRepeatWhen();
+        // rxJavaFunctionalOperator.onSubscribeOn();
+        // rxJavaFunctionalOperator.onObserveOn();
     }
 }

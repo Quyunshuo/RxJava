@@ -76,4 +76,50 @@
 
 ## 功能操作符
 
+***delay()***
+
+***doOnEach()***
+
+***doOnNext()***
+
+***doAfterNext()***
+
+***doOnComplete()***
+
+***doOnError()***
+
+***doOnSubscribe()***
+
+***doOnDispose()***
+
+***doOnLifecycle()***
+
+***doOnTerminate()***
+
+***doAfterTerminate()***
+
+***doFinally()***
+
+***onErrorReturn()***
+
+***onErrorResumeNext()***
+
+***onExceptionResumeNext()***
+
+***retry()***
+
+***retryUntil()***
+
+***retryWhen()***
+
+***repeat()***
+
+***repeatWhen()***
+
+***subscribeOn()***
+
+***observeOn()***
+
 ## 过滤操作符
+
+## 条件操作符
