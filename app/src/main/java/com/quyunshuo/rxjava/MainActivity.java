@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        RxJavaCreateOperator rxJavaCreateOperator = new RxJavaCreateOperator();
+        // 创建操作符
+        // RxJavaCreateOperator rxJavaCreateOperator = new RxJavaCreateOperator();
         // rxJavaCreateOperator.onCreate();
         // rxJavaCreateOperator.onJust();
         // rxJavaCreateOperator.onFromArray();
@@ -54,13 +55,27 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaCreateOperator.onNever();
         // rxJavaCreateOperator.onError();
 
-        RxJavaTransformOperator rxJavaTransformOperator = new RxJavaTransformOperator();
+        // 转换操作符
+        // RxJavaTransformOperator rxJavaTransformOperator = new RxJavaTransformOperator();
         // rxJavaTransformOperator.onMap();
         // rxJavaTransformOperator.onFlatMap();
         // rxJavaTransformOperator.onConcatMap();
         // rxJavaTransformOperator.onBuffer();
         // rxJavaTransformOperator.onGroupBy();
         // rxJavaTransformOperator.onScan();
-        rxJavaTransformOperator.onWindow();
+        // rxJavaTransformOperator.onWindow();
+
+        // 组合操作符
+        // RxJavaCombinationOperator rxJavaCombinationOperator = new RxJavaCombinationOperator();
+        // rxJavaCombinationOperator.onConcat();
+        // rxJavaCombinationOperator.onConcatArray();
+        // rxJavaCombinationOperator.onMergeAndMergeArray();
+        // rxJavaCombinationOperator.concatArrayDelayErrorAndMergeArrayDelayError();
+        // rxJavaCombinationOperator.onZip();
+        // rxJavaCombinationOperator.onCombineLatestAndCombineLatestDelayError();
+        // rxJavaCombinationOperator.onReduce();
+        // rxJavaCombinationOperator.onCollect();
+        // rxJavaCombinationOperator.onStartWithAndStartWithArray();
+        // rxJavaCombinationOperator.onCount();
     }
 }

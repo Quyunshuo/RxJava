@@ -307,7 +307,6 @@ public class RxJavaTransformOperator {
     /**
      * scan()
      * 将数据以一定的逻辑聚合起来。
-     * 没捋明白
      */
     public void onScan() {
         Disposable subscribe = Observable.just(1, 2, 3, 4)
