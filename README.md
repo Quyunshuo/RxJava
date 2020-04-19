@@ -147,3 +147,23 @@
 ***elementAtOrError()***
 
 ## 条件操作符
+
+***all()***
+
+***takeWhile()***
+
+***skipWhile()***
+
+***takeUntil()***
+
+***skipUntil()***
+
+***sequenceEqual()***
+
+***contains()***
+
+***isEmpty()***
+
+***amb()***
+
+***defaultIfEmpty()***

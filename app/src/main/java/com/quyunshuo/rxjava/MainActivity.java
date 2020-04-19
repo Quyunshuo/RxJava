@@ -114,5 +114,18 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaFilterOperator.onDebounce();
         // rxJavaFilterOperator.onFirstElementAndLastElement();
         // rxJavaFilterOperator.onElementAtAndElementAtOrError();
+
+        // 条件操作符
+        // RxJavaConditionalOperator rxJavaConditionalOperator = new RxJavaConditionalOperator();
+        // rxJavaConditionalOperator.onAll();
+        // rxJavaConditionalOperator.onTakeWhile();
+        // rxJavaConditionalOperator.onSkipWhile();
+        // rxJavaConditionalOperator.onTakeUntil();
+        // rxJavaConditionalOperator.onSkipUntil();
+        // rxJavaConditionalOperator.onSequenceEqual();
+        // rxJavaConditionalOperator.onContains();
+        // rxJavaConditionalOperator.onIsEmpty();
+        // rxJavaConditionalOperator.onAmb();
+        // rxJavaConditionalOperator.onDefaultIfEmpty();
     }
 }
