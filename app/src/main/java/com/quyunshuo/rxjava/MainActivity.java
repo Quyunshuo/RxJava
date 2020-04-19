@@ -101,5 +101,18 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaFunctionalOperator.onRepeatWhen();
         // rxJavaFunctionalOperator.onSubscribeOn();
         // rxJavaFunctionalOperator.onObserveOn();
+
+        // 过滤操作符
+        // RxJavaFilterOperator rxJavaFilterOperator = new RxJavaFilterOperator();
+        // rxJavaFilterOperator.onFilter();
+        // rxJavaFilterOperator.onOfType();
+        // rxJavaFilterOperator.onSkip();
+        // rxJavaFilterOperator.onSkipLast();
+        // rxJavaFilterOperator.onDistinct();
+        // rxJavaFilterOperator.onDistinctUntilChanged();
+        // rxJavaFilterOperator.onTake();
+        // rxJavaFilterOperator.onDebounce();
+        // rxJavaFilterOperator.onFirstElementAndLastElement();
+        // rxJavaFilterOperator.onElementAtAndElementAtOrError();
     }
 }

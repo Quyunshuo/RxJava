@@ -122,4 +122,28 @@
 
 ## 过滤操作符
 
+***filter()***
+
+***ofType()***
+
+***skip()***
+
+***skipLast()***
+
+***distinct()***
+
+***distinctUntilChanged()***
+
+***take()***
+
+***debounce()***
+
+***firstElement()***
+
+***lastElement()***
+
+***elementAt()***
+
+***elementAtOrError()***
+
 ## 条件操作符
