@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.quyunshuo.rxjava.databinding.ActivityMainBinding;
+import com.quyunshuo.rxjava.net.RxJavaNetworkRequestPolling;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initOperator();
         initBackPressure();
+        initActualCombat();
     }
 
     private void initView() {
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 操作符相关
+     */
     private void initOperator() {
         // 创建操作符
         // RxJavaCreateOperator rxJavaCreateOperator = new RxJavaCreateOperator();
@@ -148,14 +153,26 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaConditionalOperator.onDefaultIfEmpty();
     }
 
+    /**
+     * 背压策略相关
+     */
     private void initBackPressure() {
         // 背压策略
-        RxJavaBackPressure rxJavaBackPressure = new RxJavaBackPressure();
+        // RxJavaBackPressure rxJavaBackPressure = new RxJavaBackPressure();
         // onBackPressure1();
         // onBackPressure2();
         // rxJavaBackPressure.onBackPressure3();
         // rxJavaBackPressure.onBackPressure4();
-        rxJavaBackPressure.onBackPressure5();
+        // rxJavaBackPressure.onBackPressure5();
+    }
+
+    /**
+     * 实战相关
+     */
+    public void initActualCombat() {
+        RxJavaNetworkRequestPolling rxJavaInternetRequestPolling = new RxJavaNetworkRequestPolling();
+        // rxJavaInternetRequestPolling.unconditionalNetworkRequestPolling();
+        // rxJavaInternetRequestPolling.conditionalNetworkRequestPolling();
     }
 
     /**
