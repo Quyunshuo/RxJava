@@ -25,8 +25,8 @@ import static com.quyunshuo.rxjava.Tags.TAG;
 /**
  * @Author: QuYunShuo
  * @Time: 2020/4/20
- * @Class: RxJavaNetworkRequestPolling
- * @Remark: 网络请求轮询
+ * @Class: rxJavaActualCombat
+ * @Remark: 实战
  * URL模板
  * http://fy.iciba.com/ajax.php
  * URL示例
@@ -37,7 +37,7 @@ import static com.quyunshuo.rxjava.Tags.TAG;
  * t：译文内容类型，日语取 ja，中文取 zh，英语取 en，韩语取 ko，德语取 de，西班牙语取 es，法语取 fr，自动则取 auto
  * w：查询内容
  */
-public class RxJavaNetworkRequestPolling {
+public class RxJavaActualCombat {
 
     private static final String BASE_URL = "http://fy.iciba.com/";
 

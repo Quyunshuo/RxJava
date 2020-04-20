@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.quyunshuo.rxjava.databinding.ActivityMainBinding;
-import com.quyunshuo.rxjava.net.RxJavaNetworkRequestPolling;
+import com.quyunshuo.rxjava.net.RxJavaActualCombat;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -170,11 +170,11 @@ public class MainActivity extends AppCompatActivity {
      * 实战相关
      */
     public void initActualCombat() {
-        RxJavaNetworkRequestPolling rxJavaInternetRequestPolling = new RxJavaNetworkRequestPolling();
-        // rxJavaInternetRequestPolling.unconditionalNetworkRequestPolling();
-        // rxJavaInternetRequestPolling.conditionalNetworkRequestPolling();
-        // rxJavaInternetRequestPolling.networkRequestNestedCallback();
-        // rxJavaInternetRequestPolling.mergingDataSources();
+        RxJavaActualCombat rxJavaActualCombat = new RxJavaActualCombat();
+        // rxJavaActualCombat.unconditionalNetworkRequestPolling();
+        // rxJavaActualCombat.conditionalNetworkRequestPolling();
+        // rxJavaActualCombat.networkRequestNestedCallback();
+        // rxJavaActualCombat.mergingDataSources();
     }
 
     /**
