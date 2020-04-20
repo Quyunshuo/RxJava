@@ -12,6 +12,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -38,12 +39,17 @@ import static com.quyunshuo.rxjava.Tags.TAG;
  */
 public class RxJavaNetworkRequestPolling {
 
-    public static final String BASE_URL = "http://fy.iciba.com/";
+    private static final String BASE_URL = "http://fy.iciba.com/";
 
     /**
      * 设置变量 = 模拟轮询服务器次数
      */
     private int i = 0;
+
+    /**
+     * 用于存放最终展示的数据
+     */
+    String result = "数据源来自 = ";
 
     /**
      * 无条件网络请求轮询
@@ -223,6 +229,96 @@ public class RxJavaNetworkRequestPolling {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.d(TAG, "==========>> accept: 网络错误");
+                    }
+                });
+    }
+
+    /**
+     * 合并数据源 & 同时展示
+     * 同时向2个数据源获取数据 -> 合并数据 -> 统一展示到客户端
+     * Merge（）例子: 实现较为简单的从（网络 + 本地）获取数据 & 统一展示
+     * Zip（）例子:   结合Retrofit 与RxJava，实现较为复杂的合并2个网络请求向2个服务器获取数据 & 统一展示
+     */
+    public void mergingDataSources() {
+        /*
+         * 设置第1个Observable：通过网络获取数据
+         * 此处仅作网络请求的模拟
+         **/
+        Observable<String> network = Observable.just("网络");
+
+        /*
+         * 设置第2个Observable：通过本地文件获取数据
+         * 此处仅作本地文件请求的模拟
+         **/
+        Observable<String> file = Observable.just("本地文件");
+
+        /*
+         * 通过merge（）合并事件 & 同时发送事件
+         **/
+        Observable.merge(network, file)
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d(TAG, "==========>> onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.d(TAG, "==========>> onNext: " + s);
+                        result = result + "+" + s;
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "==========>> onError: ");
+                    }
+
+                    // 接收合并事件后，统一展示
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "==========>> onComplete: " + result);
+                    }
+                });
+
+
+        // 使用zip()
+        // 从不同数据源（2个服务器）获取数据，即 合并网络请求的发送
+        // 统一显示结果
+
+        // 创建Retrofit对象
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+
+        // 创建 网络请求接口 的实例
+        Api request = retrofit.create(Api.class);
+
+        // 采用Observable<...>形式 对 2个网络请求 进行封装
+        Observable<TranslationModel> translationModelObservable1 = request.getTranslation().subscribeOn(Schedulers.io());
+        Observable<TranslationModel2> translationModel2Observable2 = request.getTranslation2().subscribeOn(Schedulers.io());
+
+        // 注：创建BiFunction对象传入的第3个参数 = 合并后数据的数据类型
+        Disposable subscribe = Observable.zip(
+                translationModelObservable1,
+                translationModel2Observable2,
+                new BiFunction<TranslationModel, TranslationModel2, String>() {
+                    @Override
+                    public String apply(TranslationModel translationModel, TranslationModel2 translationModel2) throws Exception {
+                        return translationModel.toString() + " & " + translationModel2.toString();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Log.d(TAG, "==========>> accept: " + s);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "accept: " + throwable.getMessage());
                     }
                 });
     }

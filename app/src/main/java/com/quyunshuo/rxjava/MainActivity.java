@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         // rxJavaInternetRequestPolling.unconditionalNetworkRequestPolling();
         // rxJavaInternetRequestPolling.conditionalNetworkRequestPolling();
         // rxJavaInternetRequestPolling.networkRequestNestedCallback();
+        // rxJavaInternetRequestPolling.mergingDataSources();
     }
 
     /**
