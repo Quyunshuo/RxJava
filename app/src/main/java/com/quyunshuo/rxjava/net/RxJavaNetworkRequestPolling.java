@@ -3,6 +3,7 @@ package com.quyunshuo.rxjava.net;
 import android.util.Log;
 
 import com.quyunshuo.rxjava.model.TranslationModel;
+import com.quyunshuo.rxjava.model.TranslationModel2;
 
 import java.util.concurrent.TimeUnit;
 
@@ -160,6 +161,68 @@ public class RxJavaNetworkRequestPolling {
                     @Override
                     public void onComplete() {
                         Log.d(TAG, "==========>> onComplete: ");
+                    }
+                });
+    }
+
+    /**
+     * 网络请求嵌套回调
+     * 背景: 需要进行嵌套网络请求：即在第1个网络请求成功后，继续再进行一次网络请求
+     * 如 先进行 用户注册 的网络请求, 待注册成功后回再继续发送 用户登录 的网络请求
+     * 结合 RxJava2中的变换操作符FlatMap（）实现嵌套网络请求
+     * 实现功能：发送嵌套网络请求（将英文翻译成中文，翻译两次）
+     * 为了让大家都能完成Demo，所以通过 公共的金山词霸API 来模拟 “注册 - 登录”嵌套网络请求
+     * 即先翻译 Register（注册），再翻译 Login（登录）
+     */
+    public void networkRequestNestedCallback() {
+        // 创建Retrofit对象
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+
+        // 创建 网络请求接口 的实例
+        Api request = retrofit.create(Api.class);
+
+        Observable<TranslationModel> translationModelObservable1 = request.getTranslation();
+        final Observable<TranslationModel2> translationModelObservable2 = request.getTranslation2();
+        // 首先进行请求1(第一次的翻译)
+        Disposable subscribe = translationModelObservable1
+                // （初始被观察者）切换到IO线程进行网络请求1
+                .subscribeOn(Schedulers.io())
+                // （新观察者）切换到主线程 处理网络请求1的结果
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<TranslationModel>() {
+                    @Override
+                    public void accept(TranslationModel translationModel) throws Exception {
+                        // 对第1次网络请求返回的结果进行操作 = 显示翻译结果
+                        Log.d(TAG, "==========>> accept: 第一次请求成功" + translationModel.toString());
+                    }
+                })
+                // （新被观察者，同时也是新观察者）切换到IO线程去发起登录请求
+                .observeOn(Schedulers.io())
+                // 特别注意：因为flatMap是对初始被观察者作变换，所以对于旧被观察者，它是新观察者，所以通过observeOn切换线程
+                // 但对于初始观察者，它则是新的被观察者
+                .flatMap(new Function<TranslationModel, ObservableSource<TranslationModel2>>() {
+                    @Override
+                    public ObservableSource<TranslationModel2> apply(TranslationModel translationModel) throws Exception {
+                        // 将网络请求1转换成网络请求2，即发送网络请求2
+                        return translationModelObservable2;
+                    }
+                })
+                // （初始观察者）切换到主线程 处理网络请求2的结果
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<TranslationModel2>() {
+                    @Override
+                    public void accept(TranslationModel2 translationModel2) throws Exception {
+                        // 对第2次网络请求返回的结果进行操作 = 显示翻译结果
+                        Log.d(TAG, "==========>> accept: 第二次请求成功" + translationModel2.toString());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "==========>> accept: 网络错误");
                     }
                 });
     }
