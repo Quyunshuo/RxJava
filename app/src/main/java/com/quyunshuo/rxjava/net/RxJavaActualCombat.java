@@ -322,4 +322,54 @@ public class RxJavaActualCombat {
                     }
                 });
     }
+
+    /**
+     * 线程的调度
+     * 对RxJava进行 线程控制（也称为调度 / 切换）
+     * 采用 RxJava内置的线程调度器（ Scheduler ），即通过 功能性操作符subscribeOn（） & observeOn（）实现
+     * 线程控制，即指定 被观察者 （Observable） / 观察者（Observer） 的工作线程类型
+     * 在 RxJava中，内置了多种用于调度的线程类型
+     * <p>
+     * 类型	                                  含义	                应用场景
+     * Schedulers.immediate()	        当前线程 = 不指定线程	      默认
+     * AndroidSchedulers.mainThread()	Android主线程	          操作UI
+     * Schedulers.newThread()	        常规新线程	              耗时等操作
+     * Schedulers.io()	                io操作线程	              网络请求、读写文件等io密集型操作
+     * Schedulers.computation()	        CPU计算操作线程	          大量计算操作
+     * <p>
+     * 注：RxJava内部使用 线程池 来维护这些线程，所以线程的调度效率非常高。
+     */
+    public void threadScheduling() {
+        // Observable.subscribeOn（Schedulers.Thread）：指定被观察者 发送事件的线程（传入RxJava内置的线程类型）
+        // Observable.observeOn（Schedulers.Thread）：指定观察者 接收 & 响应事件的线程（传入RxJava内置的线程类型）
+
+        // 通过订阅（subscribe）连接观察者和被观察者
+        Disposable subscribe = Observable.just(1)
+                // 1. 指定被观察者 生产事件的线程
+                .subscribeOn(Schedulers.newThread())
+                // 2. 指定观察者 接收 & 响应事件的线程
+                .observeOn(AndroidSchedulers.mainThread())
+                // 3. 最后再通过订阅（subscribe）连接观察者和被观察者
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+
+                    }
+                });
+        // 若Observable.subscribeOn（）多次指定被观察者 生产事件的线程，则只有第一次指定有效，其余的指定线程无效
+        // 若Observable.observeOn（）多次指定观察者 接收 & 响应事件的线程，则每次指定均有效，即每指定一次，就会进行一次线程的切换
+    }
+
+    /**
+     * 资源管理
+     * 可以调用 Disposable.dispose()切断观察者和被观察者的连接，使得观察者无法收到事件 & 响应事件
+     * 当出现多个Disposable时，可采用RxJava内置容器CompositeDisposable进行统一管理
+     */
+    public void resourceManagement() {
+        // 添加Disposable到CompositeDisposable容器
+        // CompositeDisposable.add();
+
+        // 清空CompositeDisposable容器
+        // CompositeDisposable.clear();
+    }
 }
