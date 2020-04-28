@@ -12,6 +12,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -371,5 +372,34 @@ public class RxJavaActualCombat {
 
         // 清空CompositeDisposable容器
         // CompositeDisposable.clear();
+    }
+
+    /**
+     * public final Disposable subscribe(Consumer<? super T> onNext, Consumer<? super Throwable> onError,
+     * Action onComplete, Consumer<? super Disposable> onSubscribe)
+     */
+    public void onSubscribe() {
+        Disposable subscribe = Observable.just(1)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.d(TAG, "onNext: " + integer);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "onError: ");
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.d(TAG, "onCompete: ");
+                    }
+                }, new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        Log.d(TAG, "onSubscribe: ");
+                    }
+                });
     }
 }

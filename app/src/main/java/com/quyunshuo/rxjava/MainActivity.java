@@ -170,11 +170,12 @@ public class MainActivity extends AppCompatActivity {
      * 实战相关
      */
     public void initActualCombat() {
-        RxJavaActualCombat rxJavaActualCombat = new RxJavaActualCombat();
+        // RxJavaActualCombat rxJavaActualCombat = new RxJavaActualCombat();
         // rxJavaActualCombat.unconditionalNetworkRequestPolling();
         // rxJavaActualCombat.conditionalNetworkRequestPolling();
         // rxJavaActualCombat.networkRequestNestedCallback();
         // rxJavaActualCombat.mergingDataSources();
+        // rxJavaActualCombat.onSubscribe();
     }
 
     /**
